@@ -14,11 +14,16 @@ export default function RecentOrders() {
     return <div>Error: {error}</div>;
   }
 
+  // Function to determine text color based on change value
+  const getChangeColor = (change: number) => {
+    return change >= 0 ? "text-green-500" : "text-red-500";
+  };
+
   return (
     <div className="rounded-2xl border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 p-6">
       {/* Title */}
-      <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
-        Gold etf Performance
+      <h2 className="text-lg font-bold text-blue-500 dark:text-gray-100 mb-6">
+        Gold ETF Performance
       </h2>
       {/* Header Row */}
       <div className="flex justify-between px-6 font-semibold mb-4">
@@ -34,7 +39,7 @@ export default function RecentOrders() {
           <div className="flex justify-between px-6">
             <span className="w-1/3 text-left">{etf.symbol}</span>
             <span className="w-1/3 text-center">${etf.price}</span>
-            <span className="w-1/3 text-right">
+            <span className={`w-1/3 text-right font-semibold ${getChangeColor(etf.change)}`}>
               {etf.change.toFixed(2)} ({etf.changePercent.toFixed(2)}%)
             </span>
           </div>
@@ -44,8 +49,3 @@ export default function RecentOrders() {
     </div>
   );
 }
-
-
-
-
-

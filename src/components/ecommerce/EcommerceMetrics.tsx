@@ -20,7 +20,7 @@ export const EcommerceMetrics = () => {
           <div className="mt-5">
             <span className="text-sm text-gray-500 dark:text-gray-400">Gold Price (24K)</span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-              {goldPrices?.["24K"]} {goldPrices?.currency} $
+              ${goldPrices?.["24K"]} {goldPrices?.currency} 
             </h4>
           </div>
         </div>
@@ -30,7 +30,7 @@ export const EcommerceMetrics = () => {
           <div className="mt-5">
             <span className="text-sm text-gray-500 dark:text-gray-400">Gold Price (22K)</span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-              {goldPrices?.["22K"].toFixed(2)} {goldPrices?.currency} $
+              ${goldPrices?.["22K"].toFixed(2)} {goldPrices?.currency} 
             </h4>
           </div>
         </div>
@@ -40,7 +40,7 @@ export const EcommerceMetrics = () => {
           <div className="mt-5">
             <span className="text-sm text-gray-500 dark:text-gray-400">Gold Price (18K)</span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-              {goldPrices?.["18K"].toFixed(2)} {goldPrices?.currency} $
+             $ {goldPrices?.["18K"].toFixed(2)} {goldPrices?.currency} 
             </h4>
           </div>
         </div>
@@ -50,7 +50,7 @@ export const EcommerceMetrics = () => {
           <div className="mt-5">
             <span className="text-sm text-gray-500 dark:text-gray-400">Gold Price (14K)</span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-              {goldPrices?.["14K"].toFixed(2)} {goldPrices?.currency} $
+              ${goldPrices?.["14K"].toFixed(2)} {goldPrices?.currency} 
             </h4>
           </div>
         </div>

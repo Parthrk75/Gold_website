@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 
 const GoldAboutUs = () => {
   return (
@@ -34,17 +33,6 @@ const GoldAboutUs = () => {
 
           {/* Right Content */}
           <div className="space-y-6">
-            <div className="rounded-lg overflow-hidden">
-              <Image
-                src="https://images.unsplash.com/photo-1610375461369-d613b564c5c3?q=80&w=2070&auto=format&fit=crop"
-                alt="Gold bars"
-                width={600}
-                height={400}
-                layout="responsive"
-                priority
-              />
-            </div>
-
             <div className="bg-muted dark:bg-gray-900 rounded-lg p-6">
               <h3 className="font-bold text-xl mb-4 dark:text-white">Why Trust GoldTrack?</h3>
               <ul className="space-y-2">
@@ -119,3 +107,7 @@ const GoldAboutUs = () => {
 };
 
 export default GoldAboutUs;
+
+
+
+

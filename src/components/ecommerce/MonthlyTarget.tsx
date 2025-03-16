@@ -9,12 +9,13 @@ interface PerformanceData {
   oldPrice: string;
   priceDiff: string;
   change: string;
+  isPositive: boolean; // Added to track positive/negative change
 }
 
 const MonthlyTarget = () => {
   const { goldPrices, loading: liveLoading, error: liveError } = useGoldPrice();
-  const [filterDays, setFilterDays] = useState(7); // Default: 7 Days
-  const { data, loading } = useGoldData(filterDays); // Fetch data based on filterDays
+  const [filterDays, setFilterDays] = useState(7);
+  const { data, loading } = useGoldData(filterDays);
 
   const [performanceData, setPerformanceData] = useState<PerformanceData[]>([]);
 
@@ -24,14 +25,16 @@ const MonthlyTarget = () => {
     const oldPrice = data[0]?.close ?? 0;
     const newPrice = goldPrices["24K"];
     const priceDiff = newPrice - oldPrice;
-    const change = oldPrice ? ((priceDiff / oldPrice) * 100).toFixed(2) : "0";
-
+    const changePercentage = oldPrice ? (priceDiff / oldPrice) * 100 : 0;
+    const change = changePercentage.toFixed(2);
+    
     setPerformanceData([
       {
         period: getTimeLabel(filterDays),
         oldPrice: oldPrice.toFixed(2),
         priceDiff: priceDiff.toFixed(2),
         change: `${change}%`,
+        isPositive: changePercentage >= 0, // Track if change is positive or negative
       },
     ]);
   }, [goldPrices, data, loading, filterDays]);
@@ -51,7 +54,7 @@ const MonthlyTarget = () => {
   return (
     <div>
       <div className="bg-white shadow-default rounded-2xl p-6 border border-gray-300 dark:border-gray-700 dark:bg-gray-900">
-        <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+        <h2 className="text-lg font-bold text-blue-500 dark:text-gray-100 mb-4">
           Gold Price Performance
         </h2>
 
@@ -70,12 +73,14 @@ const MonthlyTarget = () => {
               </div>
               <hr className="my-2 border-gray-300 dark:border-gray-600" />
 
-              {performanceData.map(({ period, priceDiff, change }) => (
+              {performanceData.map(({ period, priceDiff, change, isPositive }) => (
                 <div key={period} className="py-3">
                   <div className="flex justify-between px-4">
                     <span className="w-1/3 text-left">{period}</span>
                     <span className="w-1/3 text-center">${priceDiff}</span>
-                    <span className="w-1/3 text-right">{change}</span>
+                    <span className={`w-1/3 text-right font-semibold ${isPositive ? "text-green-500" : "text-red-500"}`}>
+                      {change}
+                    </span>
                   </div>
                   <hr className="my-2 border-gray-300 dark:border-gray-600" />
                 </div>
