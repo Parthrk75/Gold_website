@@ -12,6 +12,7 @@ export type GoldData = {
 };
 
 type GoldPriceResponse = {
+  [x: string]: any;
   "24K": number;
   "22K": number;
   "18K": number;
@@ -112,17 +113,59 @@ export function useCustomGoldData(startDate: string, endDate: string) {
 }
 
 // ✅ Hook 3: Fetch Live Gold Price
+// export function useGoldPrice() {
+//   const [goldPrices, setGoldPrices] = useState<GoldPriceResponse | null>(null);
+//   const [loading, setLoading] = useState<boolean>(true);
+//   const [error, setError] = useState<string | null>(null);
+
+//   useEffect(() => {
+//     async function fetchGoldPrice() {
+//       try {
+//         const response = await fetch("/api/gold-price");
+//         const data = await response.json();
+
+//         if (data.error) throw new Error(data.error);
+
+//         const price24K = data.price;
+//         const goldRates: GoldPriceResponse = {
+//           "24K": price24K,
+//           "22K": (22 / 24) * price24K,
+//           "18K": (18 / 24) * price24K,
+//           "14K": (14 / 24) * price24K,
+//           currency: data.currency,
+//           timestamp: data.timestamp,
+//         };
+
+//         setGoldPrices(goldRates);
+//       } catch (err) {
+//         setError(err instanceof Error ? err.message : "An unknown error occurred");
+//       } finally {
+//         setLoading(false);
+//       }
+//     }
+
+//     fetchGoldPrice();
+//   }, []);
+
+//   return { goldPrices, loading, error };
+// }
+
+
 export function useGoldPrice() {
   const [goldPrices, setGoldPrices] = useState<GoldPriceResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [storedPrices, setStoredPrices] = useState<{ "24K": number; "22K": number; "18K": number; "14K": number } | null>(null);
 
   useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    
     async function fetchGoldPrice() {
       try {
         const response = await fetch("/api/gold-price");
+        if (!response.ok) throw new Error("Failed to fetch gold prices");
+        
         const data = await response.json();
-
         if (data.error) throw new Error(data.error);
 
         const price24K = data.price;
@@ -131,11 +174,27 @@ export function useGoldPrice() {
           "22K": (22 / 24) * price24K,
           "18K": (18 / 24) * price24K,
           "14K": (14 / 24) * price24K,
-          currency: data.currency,
-          timestamp: data.timestamp,
+          currency: data.currency || "USD",
+          updatedAt: data.updatedAt || new Date().toISOString(),
+          timestamp: ""
         };
 
         setGoldPrices(goldRates);
+        setError(null);
+
+        // Extract only the time part from the updated timestamp
+        const updatedAtTime = new Date(goldRates.updatedAt).toISOString().split("T")[1];
+
+        if (updatedAtTime.startsWith("00:05:00")) {
+          setStoredPrices({
+            "24K": goldRates["24K"],
+            "22K": goldRates["22K"],
+            "18K": goldRates["18K"],
+            "14K": goldRates["14K"],
+          });
+        } else if (updatedAtTime.startsWith("00:00:00")) {
+          setStoredPrices(null);
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : "An unknown error occurred");
       } finally {
@@ -144,10 +203,17 @@ export function useGoldPrice() {
     }
 
     fetchGoldPrice();
+    intervalId = setInterval(fetchGoldPrice, 60000); // Auto-refresh every 60 seconds
+
+    return () => clearInterval(intervalId);
   }, []);
 
-  return { goldPrices, loading, error };
+  return { goldPrices, storedPrices, loading, error };
 }
+
+
+
+
 
 // ✅ Hook 4: Fetch Gold ETF Data
 export function useGoldETFs() {
