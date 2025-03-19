@@ -1,14 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 // ✅ Define types at the top
 export type GoldData = {
+  [x: string]: ReactNode;
   date: string;
   open: number | null;
   high: number | null;
   low: number | null;
   close: number | null;
   volume: number | null;
+  
 };
 
 
@@ -68,42 +72,12 @@ export function useGoldData(filterDays: number = 7) {
   return { data, loading, error };
 }
 
-// ✅ Hook 2: Fetch Gold Data Based on Custom Start & End Dates
-export function useCustomGoldData(startDate: string, endDate: string) {
-  const [data, setData] = useState<GoldData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchGoldData() {
-      try {
-        setLoading(true);
 
-        const params = new URLSearchParams({
-          startDate,
-          endDate,
-          interval: "1d",
-        });
 
-        const response = await fetch(`/api/historical-data?${params.toString()}`);
-        if (!response.ok) throw new Error("Failed to fetch data");
 
-        const result = await response.json();
-        setData(result.historicalData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An unknown error occurred");
-      } finally {
-        setLoading(false);
-      }
-    }
 
-    fetchGoldData();
-  }, [startDate, endDate]);
-
-  return { data, loading, error };
-}
-
-// ✅ Hook 3: Fetch Live Gold Price
+// ✅ Hook 2: Fetch Live Gold Price
 export const useLiveGoldPrice = () => {
   const [goldPrices, setGoldPrices] = useState<{ [key: string]: number | null }>({
     "24K": null,
@@ -148,7 +122,7 @@ export const useLiveGoldPrice = () => {
 
 
 
-// ✅ Hook 4: Fetch Gold ETF Data
+// ✅ Hook 3: Fetch Gold ETF Data
 export function useGoldETFs() {
   const [etfData, setEtfData] = useState<ETFData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -177,7 +151,7 @@ export function useGoldETFs() {
   return { etfData, loading, error };
 }
 
-// ✅ Hook 5: Fetch Gold Mining Stocks
+// ✅ Hook 4: Fetch Gold Mining Stocks
 export function useGoldMiningStocks() {
   const [stockData, setStockData] = useState<StockData[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -204,4 +178,70 @@ export function useGoldMiningStocks() {
   }, []);
 
   return { stockData, loading, error };
+}
+
+
+
+
+import "react-datepicker/dist/react-datepicker.css";
+
+
+
+
+export function useGoldDataDownload() {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [data, setData] = useState<GoldData[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!startDate || !endDate) return; // Prevent fetching until both dates are selected
+
+    const fetchGoldData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const params = new URLSearchParams({
+          startDate: startDate.toISOString().split("T")[0],
+          endDate: endDate.toISOString().split("T")[0],
+          interval: "1d",
+        });
+
+        const response = await fetch(`/api/historical-data?${params.toString()}`);
+        if (!response.ok) throw new Error(`Failed to fetch data: ${response.statusText}`);
+
+        const result = await response.json();
+        if (JSON.stringify(result.historicalData) !== JSON.stringify(data)) {
+          setData(result.historicalData || []);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An unknown error occurred");
+        setData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGoldData();
+  }, [startDate, endDate]);
+
+  const downloadExcel = () => {
+    if (!data.length) {
+      alert("No data available to download");
+      return;
+    }
+
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Gold Prices");
+
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const dataBlob = new Blob([excelBuffer], { type: "application/octet-stream" });
+
+    saveAs(dataBlob, "gold_prices.xlsx");
+  };
+
+  return { startDate, setStartDate, endDate, setEndDate, data, loading, error, downloadExcel };
 }
