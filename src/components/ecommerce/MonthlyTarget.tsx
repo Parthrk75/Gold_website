@@ -56,7 +56,7 @@ const MonthlyTarget = () => {
   return (
     <div>
       <div className="bg-white shadow-default rounded-2xl p-6 border border-gray-300 dark:border-gray-700 dark:bg-gray-900">
-        <h2 className="text-lg font-bold text-blue-500 dark:text-gray-100 mb-4">
+        <h2 className="text-lg font-bold text-blue-500 dark:text-blue-500 mb-4">
           Gold Price Performance
         </h2>
 

@@ -22,7 +22,7 @@ export default function RecentOrders() {
   return (
     <div className="rounded-2xl border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 p-6">
       {/* Title */}
-      <h2 className="text-lg font-bold text-blue-500 dark:text-gray-100 mb-6">
+      <h2 className="text-lg font-bold text-blue-500 dark:text-blue-500 mb-6">
         Gold ETF Performance
       </h2>
       {/* Header Row */}

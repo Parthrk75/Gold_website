@@ -115,7 +115,7 @@ export default function StatisticsChart() {
       {/* Tabs should be in one row on larger screens */}
       <div className="flex flex-wrap sm:flex-nowrap justify-between items-center mb-6">
         <div>
-          <h3 className="text-lg text-blue-500 font-semibold  dark:text-white">Gold Price Statistics</h3>
+          <h3 className="text-lg text-blue-500 font-semibold  dark:text-blue-500">Gold Price Statistics</h3>
           <p className="text-gray-500 text-sm dark:text-gray-400">Historical gold prices for {filterDays} days</p>
         </div>
         <div className="flex flex-wrap gap-2 sm:gap-4">

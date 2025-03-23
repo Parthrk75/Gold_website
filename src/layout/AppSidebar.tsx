@@ -26,23 +26,13 @@ const navItems: NavItem[] = [
   },
   {
     icon: <CalenderIcon />,
-    name: "Gold ETF",
-    path: "/gold-etf",
-  },
-  {
-    icon: <CalenderIcon />,
-    name: "Gold Stock",
-    path: "/gold-stock",
-  },
-  {
-    icon: <CalenderIcon />,
-    name: "Gold News",
-    path: "/gold-news",
-  },
-  {
-    icon: <CalenderIcon />,
     name: "Gold Blogs",
     path: "/gold-blog",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Historical data",
+    path: "/gold-etf",
   },
   {
     icon: <CalenderIcon />,
