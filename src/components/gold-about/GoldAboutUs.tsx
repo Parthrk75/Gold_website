@@ -6,7 +6,7 @@ const GoldAboutUs = () => {
       {/* About Section */}
       <div className="bg-muted dark:bg-gray-900">
         <div className="container">
-          <h1 className="text-4xl font-bold mb-4 dark:text-white">About GoldTrack</h1>
+          <h1 className="text-4xl font-bold mb-4 dark:text-white">About TodayGoldPrices</h1>
           <p className="text-muted-foreground dark:text-gray-300 max-w-2xl">
             Learn more about our mission to provide accurate and timely gold price information.
           </p>
@@ -19,7 +19,7 @@ const GoldAboutUs = () => {
           <div className="md:col-span-2">
             <h2 className="text-3xl font-bold mb-6 dark:text-white">Our Mission</h2>
             <p className="text-lg mb-6 dark:text-gray-300">
-              At GoldTrack, we&apos;re dedicated to providing investors, traders, and gold enthusiasts with the most accurate, up-to-date information on gold prices and market trends.
+              At TodayGoldPrices, we&apos;re dedicated to providing investors, traders, and gold enthusiasts with the most accurate, up-to-date information on gold prices and market trends.
             </p>
             <p className="mb-6 dark:text-gray-300">
               Founded in 2025, our platform combines real-time data, comprehensive historical analysis, and expert market insights to help you make informed decisions about gold investments.
@@ -34,7 +34,7 @@ const GoldAboutUs = () => {
           {/* Right Content */}
           <div className="space-y-6">
             <div className="bg-muted dark:bg-gray-900 rounded-lg p-6">
-              <h3 className="font-bold text-xl mb-4 dark:text-white">Why Trust GoldTrack?</h3>
+              <h3 className="font-bold text-xl mb-4 dark:text-white">Why Trust TodayGoldPrices?</h3>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <span className="text-primary dark:text-yellow-400 mr-2">✓</span>
