@@ -53,7 +53,10 @@ export const EcommerceMetrics = () => {
               className={`rounded-2xl border border-gray-200 p-5 dark:border-gray-800 md:p-6 shadow-md transition-all ${shadowColor}`}
             >
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Gold Price ({karat})</span>
+              <span className="text-sm font-medium text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-300 bg-clip-text">
+  Gold Price ({karat})
+</span>
+
                 {priceChange !== 0 && (
                   <span className={`flex items-center gap-1 text-sm font-medium ${isIncreased ? "text-green-600" : "text-red-600"}`}>
                     {isIncreased ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
@@ -71,8 +74,8 @@ export const EcommerceMetrics = () => {
         <div className="flex items-start gap-3">
           <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
           <div>
-            <h3 className="font-semibold text-yellow-800 dark:text-yellow-300">Gold Market Closed on Weekends</h3>
-            <p className="text-yellow-700 dark:text-yellow-400 mt-1">
+            <h3 className="font-semibold text-yellow-800 dark:text-white">Gold Market Closed on Weekends</h3>
+            <p className="text-yellow-700 dark:text-white mt-1">
               Gold prices remain unchanged on Saturday and Sunday, as the market is closed on weekends.
             </p>
           </div>

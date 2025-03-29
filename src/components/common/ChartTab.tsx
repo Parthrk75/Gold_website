@@ -10,9 +10,9 @@ const ChartTab: React.FC<ChartTabProps> = ({ setFilterDays }) => {
 
   const getButtonClass = (option: 7 | 14 | 30 | 180 | 365 | 1825) =>
     selected === option
-      ? "shadow-theme-xs text-blue-500 font-semibold bg-white dark:bg-gray-800"
+      ? "shadow-theme-xs text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-300 bg-clip-text font-semibold bg-white dark:bg-gray-800"
       : "text-gray-500 dark:text-gray-400";
-
+  
   return (
     <div className="flex flex-wrap md:flex-nowrap justify-center md:justify-start gap-2 p-1 rounded-lg bg-gray-100 dark:bg-gray-900">
       {[7, 14, 30, 180, 365, 1825].map((days) => (

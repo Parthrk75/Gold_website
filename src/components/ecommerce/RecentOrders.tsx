@@ -20,13 +20,14 @@ export default function RecentOrders() {
   };
 
   return (
-    <div className="rounded-2xl border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 p-6">
+    <div className="rounded-3xl border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 p-8 shadow-2xl dark:shadow-gray-900/50 backdrop-blur-md bg-white/50 dark:bg-gray-900/40 transition-all duration-300">
       {/* Title */}
-      <h2 className="text-lg font-bold text-blue-500 dark:text-blue-500 mb-6">
+      <h2 className="text-xl font-extrabold text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-300 bg-clip-text mb-6">
         Gold ETF Performance
       </h2>
+
       {/* Header Row */}
-      <div className="flex justify-between px-6 font-semibold mb-4">
+      <div className="flex justify-between px-6 font-semibold text-gray-900 dark:text-gray-100 mb-4">
         <span className="w-1/3 text-left">Symbol</span>
         <span className="w-1/3 text-center">Price</span>
         <span className="w-1/3 text-right">Changes</span>
@@ -35,10 +36,10 @@ export default function RecentOrders() {
 
       {/* Data Rows */}
       {etfData.map((etf) => (
-        <div key={etf.symbol} className="">
+        <div key={etf.symbol} className="hover:bg-gray-200 dark:hover:bg-gray-800/50 transition-all duration-200 rounded-xl p-2">
           <div className="flex justify-between px-6">
             <span className="w-1/3 text-left">{etf.symbol}</span>
-            <span className="w-1/3 text-center">${etf.price}</span>
+            <span className="w-1/3 text-center font-semibold">${etf.price}</span>
             <span className={`w-1/3 text-right font-semibold ${getChangeColor(etf.change)}`}>
               {etf.change.toFixed(2)} ({etf.changePercent.toFixed(2)}%)
             </span>
