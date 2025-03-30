@@ -35,30 +35,41 @@ export default function StatisticsChart() {
   const processedData = useMemo(() => {
     if (filterDays === 365) return aggregateData(data, "monthly");
     if (filterDays === 1825) return aggregateData(data, "yearly");
-    if (filterDays === 180) return data.filter((_, index) => index % 5 === 0);
+    if (filterDays === 180) return aggregateData(data, "monthly");
     return data;
   }, [data, filterDays]);
 
-  const formattedDates = useMemo(() =>
-    processedData.map((entry) => {
-      if (filterDays === 365) return format(parseISO(entry.date), "MMM yyyy");
-      if (filterDays === 1825) return entry.date;
+  // Format dates for x-axis labels
+  const formattedDates = useMemo(() => 
+    processedData.map((entry, index) => {
+      if (filterDays === 30 && index % 3 !== 0) return ""; // Show every 3rd date
+      if (filterDays === 365 && index % 2 !== 0) return ""; // Show every 5th month
       const parsedDate = parseISO(entry.date);
-      return isValid(parsedDate)
+      return isValid(parsedDate) 
         ? format(parsedDate, filterDays <= 30 ? "dd MMM" : filterDays <= 365 ? "MMM yyyy" : "yyyy")
         : "Invalid Date";
     }),
   [processedData, filterDays]);
 
-  const closePrices = useMemo(() => processedData.map((entry) => parseFloat((entry.close ?? 0).toFixed(2))), [processedData]);
+  // Keep all close prices for graph plotting
+  const closePrices = useMemo(() => 
+    processedData.map((entry) => parseFloat((entry.close ?? 0).toFixed(2))),
+  [processedData]);
 
   const options: ApexOptions = useMemo(() => ({
     chart: { type: "line", height: 310, toolbar: { show: false } },
-    xaxis: { type: "category", categories: formattedDates, labels: { rotate: -45 } },
-    yaxis: { title: { text: "Close Price (USD)" }, labels: { formatter: (value) => value.toFixed(2) } },
+    xaxis: { 
+      type: "category", 
+      categories: formattedDates, // Uses modified x-axis labels
+      labels: { rotate: -45 }
+    },
+    yaxis: { 
+      title: { text: "Close Price (USD)" }, 
+      labels: { formatter: (value) => value.toFixed(2) } 
+    },
     stroke: { curve: "smooth", width: 2 },
     tooltip: {
-      x: { formatter: (_, { dataPointIndex }) => formattedDates[dataPointIndex] || "Invalid Date" },
+      x: { formatter: (_, { dataPointIndex }) => processedData[dataPointIndex].date || "Invalid Date" },
       y: { formatter: (value) => value.toFixed(2) },
     },
   }), [formattedDates]);
@@ -67,13 +78,14 @@ export default function StatisticsChart() {
     <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-lg dark:shadow-md">
 
       <div className="flex flex-wrap sm:flex-nowrap justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-300 bg-clip-text">
-          Gold Price Statistics
-        </h2>
+             <h2 className="text-xl font-extrabold text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-300 bg-clip-text mb-6">
+        Gold Price Statistics
+      </h2>
         <div className="flex flex-wrap gap-2 sm:gap-4">
           <ChartTab setFilterDays={setFilterDays} />
         </div>
       </div>
+      
       {loading ? (
         <p className="text-center text-gray-500">Loading...</p>
       ) : error ? (

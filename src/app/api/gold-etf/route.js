@@ -10,8 +10,8 @@ const ETF_SYMBOLS = [
   "PHYS", // Sprott Physical Gold Trust
   "BAR",  // GraniteShares Gold Trust
   "AAAU", // Goldman Sachs Physical Gold ETF
-  "UGL",  // ProShares Ultra Gold (2x Leverage)
-  "DGL"   // Invesco DB Gold Fund
+  // "UGL",  // ProShares Ultra Gold (2x Leverage)
+  // "DGL"   // Invesco DB Gold Fund
 ];
 
 export async function GET() {

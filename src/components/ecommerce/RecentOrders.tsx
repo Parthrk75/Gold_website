@@ -23,7 +23,7 @@ export default function RecentOrders() {
     <div className="rounded-3xl border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 p-8 shadow-2xl dark:shadow-gray-900/50 backdrop-blur-md bg-white/50 dark:bg-gray-900/40 transition-all duration-300">
       {/* Title */}
       <h2 className="text-xl font-extrabold text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-300 bg-clip-text mb-6">
-        Gold ETF Performance
+        Gold ETF
       </h2>
 
       {/* Header Row */}

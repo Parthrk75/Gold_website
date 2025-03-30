@@ -1,9 +1,11 @@
 "use client";
 
+import SchemaMarkup from "@/components/SchemaMarkup";
 import { useSidebar } from "@/context/SidebarContext";
 import AppHeader from "@/layout/AppHeader";
 import AppSidebar from "@/layout/AppSidebar";
 import Backdrop from "@/layout/Backdrop";
+import Head from "next/head";
 import React from "react";
 
 export default function AdminLayout({
@@ -22,6 +24,19 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen xl:flex">
+       <Head>
+        <title>Admin Dashboard | Today Gold Prices</title>
+        <meta
+          name="description"
+          content="Admin dashboard for managing gold prices, analytics, and e-commerce data."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="Admin Dashboard | Today Gold Prices" />
+        <meta property="og:description" content="Manage and track live gold prices efficiently." />
+        <meta property="og:url" content="https://www.todaygoldprices.org/admin" />
+        <meta property="og:type" content="website" />
+        <SchemaMarkup /> {/* ✅ Schema Markup Added */}
+      </Head>
       {/* Sidebar and Backdrop */}
       <AppSidebar />
       <Backdrop />
@@ -37,3 +52,6 @@ export default function AdminLayout({
     </div>
   );
 }
+
+
+
