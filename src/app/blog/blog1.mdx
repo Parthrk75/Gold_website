@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 
 export default function GoldPriceFluctuationBlog() {
   return (
@@ -17,6 +18,18 @@ export default function GoldPriceFluctuationBlog() {
 
       <main className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
         <section className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-xl text-gray-800 leading-relaxed">
+
+          {/* Hero Image */}
+          <div className="mb-6">
+            <Image
+              src="/gold1.png"
+              alt="Gold price fluctuation chart"
+              width={600}
+              height={300}
+              className="rounded-xl w-full object-cover"
+            />
+          </div>
+
           <h1 className="text-3xl font-bold mb-6 text-yellow-600">Why Gold Prices Fluctuate Daily: Explained Simply</h1>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Introduction</h2>
@@ -58,6 +71,14 @@ export default function GoldPriceFluctuationBlog() {
             <li><strong>Speculation:</strong> Traders betting on price movement cause quick shifts.</li>
             <li><strong>News Headlines:</strong> A single report can create panic or excitement.</li>
             <li><strong>Digital & Algorithmic Trading:</strong> Prices can change in seconds due to AI-powered systems.</li>
+          </ul>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4">5. How Gold Prices Are Determined Daily</h2>
+          <p className="mb-4">Gold is traded globally 24/7. Prices are set based on futures trading on major exchanges like the COMEX (New York), London Metal Exchange, and others.</p>
+          <ul className="list-disc ml-6 mb-4 space-y-2">
+            <li><strong>Live Spot Price:</strong> The current market value of gold, updated in real-time based on trade volume.</li>
+            <li><strong>Futures Contracts:</strong> Investors bet on the future price of gold, impacting current trends.</li>
+            <li><strong>Market Makers:</strong> Large institutions that influence liquidity and price consistency.</li>
           </ul>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Conclusion</h2>
