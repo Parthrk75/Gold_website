@@ -1,5 +1,5 @@
 "use client"
-import BlogPost from './test.mdx';
+import BlogPost from './blog1.mdx';
 
 import { MDXProvider } from "@mdx-js/react";
 
