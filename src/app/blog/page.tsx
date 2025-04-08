@@ -3,6 +3,11 @@
 import { useState } from "react";
 import BlogPost from "./blog1.mdx";
 import BlogPost1 from "./blog2.mdx";
+import BlogPost2 from "./blog3.mdx";
+import BlogPost3 from "./blog4.mdx";
+import BlogPost4 from "./blog5.mdx";
+import BlogPost5 from "./blog6.mdx";
+import BlogPost6 from "./blog7.mdx";
 import { MDXProvider } from "@mdx-js/react";
 import { Calendar, Clock, User, ChevronRight } from "lucide-react";
 
@@ -33,10 +38,86 @@ export default function BlogPage() {
       date: "April 5, 2025",
       readTime: "7 min read",
       imageUrl:
-        "https://images.unsplash.com/photo-1611078489935-0cb9647b1781?auto=format&fit=crop&w=800",
+        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800",
+
       category: "Investing",
       featured: true,
       component: <BlogPost1 />,
+    },
+    {
+      id: "blog3",
+      title: "How Global Events Impact Gold Prices",
+      summary:
+        "Should you invest in gold or stocks in 2025? Explore the pros and cons and what experts are saying.",
+      author: "Jane Smith",
+      date: "April 5, 2025",
+      readTime: "7 min read",
+      imageUrl:
+        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800",
+
+      category: "Investing",
+      featured: false,
+      component: <BlogPost2 />,
+    },
+    {
+      id: "blog4",
+      title: "Is Now a Good Time to Buy Gold? Expert Insights",
+      summary:
+        "Should you invest in gold or stocks in 2025? Explore the pros and cons and what experts are saying.",
+      author: "Jane Smith",
+      date: "April 5, 2025",
+      readTime: "7 min read",
+      imageUrl:
+        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800",
+
+      category: "Investing",
+      featured: false,
+      component: <BlogPost3 />,
+    },
+    {
+      id: "blog5",
+      title: "5 Common Mistakes to Avoid When Investing in Gold",
+      summary:
+        "Should you invest in gold or stocks in 2025? Explore the pros and cons and what experts are saying.",
+      author: "Jane Smith",
+      date: "April 5, 2025",
+      readTime: "7 min read",
+      imageUrl:
+        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800",
+
+      category: "Investing",
+      featured: false,
+      component: <BlogPost4 />,
+    },
+    {
+      id: "blog6",
+      title: "22K vs 24K Gold: What’s the Difference and Which Should You Buy?",
+      summary:
+        "Should you invest in gold or stocks in 2025? Explore the pros and cons and what experts are saying.",
+      author: "Jane Smith",
+      date: "April 5, 2025",
+      readTime: "7 min read",
+      imageUrl:
+        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800",
+
+      category: "Investing",
+      featured: false,
+      component: <BlogPost5 />,
+    },
+    {
+      id: "blog7",
+      title: "How Is the Daily Gold Rate Calculated?",
+      summary:
+        "Should you invest in gold or stocks in 2025? Explore the pros and cons and what experts are saying.",
+      author: "Jane Smith",
+      date: "April 5, 2025",
+      readTime: "7 min read",
+      imageUrl:
+        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800",
+
+      category: "Investing",
+      featured: false,
+      component: <BlogPost6 />,
     },
   ];
 
@@ -50,7 +131,7 @@ export default function BlogPage() {
         {activePost === null ? (
           <>
             {featuredPost && (
-              <section className="bg-gray-50 py-16">
+              <section>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
                   <div>
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
@@ -144,7 +225,7 @@ export default function BlogPage() {
             >
               ← Back to all blogs
             </button>
-            <div className="bg-white p-6 rounded-2xl shadow-lg">
+            <div>
               {blogs.find((blog) => blog.id === activePost)?.component}
             </div>
           </div>
