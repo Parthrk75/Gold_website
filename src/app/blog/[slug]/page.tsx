@@ -52,14 +52,15 @@ async function getPostBySlug(slug: string): Promise<{ frontmatter: BlogFrontmatt
 }
 
 // Props expected by the page component
+// Adjust Props type to expect a Promise for params
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 // Page component
-export default async function BlogPostPage(props: Props) {
-  const { slug } = props.params;
-
+export default async function BlogPostPage({ params }: Props) {
+  // Ensure params is awaited properly
+  const { slug } = await params;
 
   const result = await getPostBySlug(slug);
   if (!result) return notFound();
@@ -76,6 +77,8 @@ export default async function BlogPostPage(props: Props) {
     </div>
   );
 }
+
+
 
 // For static site generation (SSG)
 export async function generateStaticParams() {
