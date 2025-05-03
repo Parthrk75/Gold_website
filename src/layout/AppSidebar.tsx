@@ -26,7 +26,7 @@ const navItems: NavItem[] = [
   {
     icon: <CalenderIcon />,
     name: "Gold Blogs",
-    path: "/gold-blog",
+    path: "/blog",
   },
   {
     icon: <CalenderIcon />,
