@@ -12,7 +12,7 @@ type BlogPost = {
   description: string;
 };
 
-async function getAllPosts(): Promise<BlogPost[]> {
+ async function getAllPosts(): Promise<BlogPost[]> {
   try {
     const files = await fs.promises.readdir(postsDir);
     const posts = await Promise.all(
