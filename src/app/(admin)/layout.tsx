@@ -1,10 +1,7 @@
 "use client";
 
 import SchemaMarkup from "@/components/SchemaMarkup";
-import { useSidebar } from "@/context/SidebarContext";
 import AppHeader from "@/layout/AppHeader";
-import AppSidebar from "@/layout/AppSidebar";
-import Backdrop from "@/layout/Backdrop";
 import Head from "next/head";
 import React from "react";
 
@@ -13,19 +10,14 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
   // Dynamic class for main content margin based on sidebar state
-  const mainContentMargin = isMobileOpen
-    ? "ml-0"
-    : isExpanded || isHovered
-    ? "lg:ml-[290px]"
-    : "lg:ml-[90px]";
+  
 
   return (
-    <div className="min-h-screen xl:flex">
+    <div className="min-h-screen">
        <Head>
-        <title>Admin Dashboard | Today Gold Prices</title>
+        <title>Today Gold Prices</title>
         <meta
           name="description"
           content="Admin dashboard for managing gold prices, analytics, and e-commerce data."
@@ -37,12 +29,9 @@ export default function AdminLayout({
         <meta property="og:type" content="website" />
         <SchemaMarkup /> {/* ✅ Schema Markup Added */}
       </Head>
-      {/* Sidebar and Backdrop */}
-      <AppSidebar />
-      <Backdrop />
-      {/* Main Content Area */}
+     
       <div
-        className={`flex-1 transition-all  duration-300 ease-in-out ${mainContentMargin}`}
+        
       >
         {/* Header */}
         <AppHeader />

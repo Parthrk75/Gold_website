@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import React from 'react';
+import Link from 'next/link';
 
 // Custom MDX component overrides with Tailwind styles
 const components = {
@@ -68,8 +69,17 @@ export default async function BlogPostPage({ params }: Props) {
   const { frontmatter, content } = result;
 
   return (
-    <div className="prose dark:prose-invert max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-yellow-700 mb-6">{frontmatter.title}</h1>
+    <div className="prose dark:prose-invert max-w-3xl mx-auto">
+      {/* Back Button */}
+      <div className="mb-6">
+        <Link
+          href="/blog"
+          className="inline-flex items-center text-sm font-semibold text-yellow-600 hover:underline"
+        >
+          ← Back to Blog
+        </Link>
+      </div>
+      {/* <h1 className="text-3xl font-bold text-yellow-700 mb-6">{frontmatter.title}</h1> */}
       <p className="text-gray-700 dark:text-gray-300 mb-4">{frontmatter.description}</p>
       <p className="text-gray-500 dark:text-gray-400 text-sm">{frontmatter.date}</p>
 

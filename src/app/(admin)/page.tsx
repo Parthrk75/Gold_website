@@ -6,7 +6,6 @@ import StatisticsChart from "@/components/ecommerce/StatisticsChart";
 
 import DemographicCard from "@/components/ecommerce/DemographicCard";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
-import LatestPosts from "@/components/ecommerce/LatestPosts";
 
 export const metadata: Metadata = {
   title: "Live Gold Prices & Charts | TodayGoldPrices.org",
@@ -54,9 +53,7 @@ export default function Ecommerce() {
       <div className="col-span-12 xl:col-span-6">
         <RecentOrders/>
       </div>
-      <div className="col-span-12">
-        <LatestPosts/>
-      </div>
+      
       
     </div>
   );

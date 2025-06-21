@@ -46,12 +46,20 @@ export default async function BlogListPage() {
   const remainingPosts = posts.slice(1);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16">
+    <div className="max-w-7xl mx-auto px-6">
+      {/* Back Button */}
+      <div className="mb-6">
+        <Link
+          href="/"
+          className="inline-flex items-center text-sm font-semibold text-yellow-600 hover:underline"
+        >
+          ← Back
+        </Link>
+      </div>
       {/* Hero Section - Latest Blog Post */}
       <div className="mb-12">
         <Link key={latestPost.slug} href={`/blog/${latestPost.slug}`}>
           <div className="group border border-gray-200 dark:border-gray-700 p-10 rounded-2xl bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
-            <div className="text-xs uppercase font-semibold text-yellow-600 mb-2">Gold Insights</div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white group-hover:text-yellow-500">
               {latestPost.title}
             </h2>
@@ -60,7 +68,6 @@ export default async function BlogListPage() {
             </p>
             <div className="flex justify-between items-center text-xs text-gray-400 dark:text-gray-400 mt-6">
               <span>{latestPost.date}</span>
-              <span>6 min read</span>
             </div>
           </div>
         </Link>
@@ -80,21 +87,10 @@ export default async function BlogListPage() {
               </p>
               <div className="flex justify-between items-center text-xs text-gray-400 dark:text-gray-400 mt-4">
                 <span>{post.date}</span>
-                <span>5 min read</span>
               </div>
             </div>
           </Link>
         ))}
-      </div>
-
-      {/* View All Blogs Button */}
-      <div className="text-center mt-12">
-        <Link
-          href="/gold-blog"
-          className="inline-block px-8 py-4 bg-yellow-500 text-white text-lg rounded-full shadow-md hover:bg-yellow-600 hover:shadow-xl transition-all duration-300"
-        >
-          View All Blogs →
-        </Link>
       </div>
     </div>
   );
